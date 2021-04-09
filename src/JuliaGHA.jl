@@ -5,7 +5,7 @@ using DataStructures
 export add, do_stuff
 
 function add(x, y)
-    return x + y + 1
+    return x + y
 end
 
 function do_stuff()
