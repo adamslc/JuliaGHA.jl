@@ -6,7 +6,7 @@ test:
 	julia --project=. -e 'using Pkg; Pkg.test()'
 
 .PHONY: lint
-format:
+lint:
 	./utils/lint/lint.sh
 
 .PHONY: format
