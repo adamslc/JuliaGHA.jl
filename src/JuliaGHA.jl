@@ -11,9 +11,9 @@ end
 function do_stuff()
     queue = Queue{Int}()
 
-    push!(queue, 1)
-    push!(queue, 2)
-    push!(queue, "three")
+    enqueue!(queue, 1)
+    enqueue!(queue, 2)
+    enqueue!(queue, "three")
 
     return queue
 end
