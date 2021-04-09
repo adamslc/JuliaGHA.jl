@@ -13,7 +13,7 @@ function do_stuff()
 
     enqueue!(queue, 1)
     enqueue!(queue, 2)
-    enqueue!(queue, "three")
+    # enqueue!(queue, "three")
 
     return queue
 end
