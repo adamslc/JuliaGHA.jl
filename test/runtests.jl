@@ -1,5 +1,6 @@
 using JuliaGHA
 using Test
+using DataStructures
 
 @testset "JuliaGHA.jl" begin
     @test add(2, 2) == 4
