@@ -3,6 +3,9 @@ uuid = "449b33cf-0239-41be-a910-6c2e172e062e"
 authors = ["Luke Adams <luke@lukeclydeadams.com> and contributors"]
 version = "0.1.0"
 
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+
 [compat]
 julia = "1"
 
