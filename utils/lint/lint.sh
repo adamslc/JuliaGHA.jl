@@ -4,7 +4,7 @@
 JULIA_LOAD_PATH=utils/lint:.
 julia --project=utils/lint -e '
 directory = basename(pwd())
-if !(directory in ["JuliaGHA", JuliaGHA.jl"])
+if !(directory in ["JuliaGHA", "JuliaGHA.jl"])
 	@error "Format script should be run the project root directory"
 	exit(1)
 end
