@@ -1,8 +1,11 @@
 #!/bin/sh
 
+echo ${PWD##*/}
+
 # Ensure that we are in the base directory
-if [[ ${PWD##*/} != "JuliaGHA" ]]; then
+if !([[ ${PWD##*/} == "JuliaGHA" ]] || [[ ${PWD##*/} == "JuliaGHA.jl" ]]); then
 	echo 'This script should be run from the project root directory!'
+	exit 1
 fi
 
 # Instantiate the format enviroment and format all .jl and .md files in the project root directory.

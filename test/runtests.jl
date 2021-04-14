@@ -7,8 +7,8 @@ using GitHubActions: GitHubActionsLogger
 get(ENV, "GITHUB_ACTIONS", "false") == "true" && global_logger(GitHubActionsLogger())
 
 @debug "foo bar" rand(3)
-@info  "foo bar" rand(3)
-@warn  "foo bar" rand(3)
+@info "foo bar" rand(3)
+@warn "foo bar" rand(3)
 @error "foo bar" rand(3)
 
 @testset "JuliaGHA.jl" begin
