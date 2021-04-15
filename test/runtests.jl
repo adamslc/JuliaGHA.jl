@@ -26,7 +26,7 @@ get(ENV, "GITHUB_ACTIONS", "false") == "true" &&
         try
             sqrt(-1)
         catch e
-            @error "asdfasdf" exception=(e, catch_backtrace())
+            @error "asdfasdf" exception = (e, catch_backtrace())
         end
     end
 end
