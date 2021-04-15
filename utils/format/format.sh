@@ -1,7 +1,5 @@
 #!/bin/sh
 
-echo ${PWD##*/}
-
 # Instantiate the format enviroment and format all .jl and .md files in the project root directory.
 julia --project=utils/format -e '
 directory = basename(pwd())
