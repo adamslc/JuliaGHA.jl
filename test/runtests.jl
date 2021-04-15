@@ -4,7 +4,7 @@ using DataStructures
 
 using Logging: global_logger
 using GitHubActions
-# get(ENV, "GITHUB_ACTIONS", "false") == "true" &&
+get(ENV, "GITHUB_ACTIONS", "false") == "true" &&
     global_logger(GitHubActions.GitHubActionsLogger())
 
 using Pkg
