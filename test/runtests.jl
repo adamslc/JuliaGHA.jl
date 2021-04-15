@@ -24,6 +24,6 @@ using LoggingTestSets
     @testset "Badness" begin
         @test 1 + 1 == 2
         @test 1 - 1 == 0
-        @test 2 / 2 == 1
+        @test 2 / 2 == 2
     end
 end
