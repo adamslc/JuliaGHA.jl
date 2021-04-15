@@ -19,7 +19,8 @@ jobs:
         run: |
           env
           git branch -vv
-          git checkout master
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+          git checkout origin/master
           ./utils/format/format.sh
           git commit -am 'formatted master'
       - name: Check formatting
