@@ -18,4 +18,15 @@ get(ENV, "GITHUB_ACTIONS", "false") == "true" &&
         @test 2 * 2 == 4
     end
     GitHubActions.end_group()
+
+    @testset "Badness" begin
+        @test 1 + 1 == 2
+        @test 1 - 1 == 0
+
+        try
+            sqrt(-1)
+        catch e
+            @error "asdfasdf" exception=(e, catch_backtrace())
+        end
+    end
 end
