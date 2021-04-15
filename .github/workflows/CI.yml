@@ -16,13 +16,7 @@ jobs:
           version: '1.6'
           arch: x64
       - name: Format with JuliaFormatter
-        run: |
-          env
-          git branch -vv
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-          git checkout origin/master
-          ./utils/format/format.sh
-          git commit -am 'formatted master'
+        run: ./utils/format/format.sh
       - name: Check formatting
         run: |
           if [[ $(git diff --name-only | wc -l) -ge 1 ]]; then exit 1; else exit 0; fi
