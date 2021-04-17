@@ -34,7 +34,7 @@ jobs:
         run: ./utils/lint/lint.sh
 
   test:
-    name: Run Tests - Julia v${{ matrix.version }}
+    name: Run Tests on Julia v${{ matrix.version }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
