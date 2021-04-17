@@ -3,9 +3,13 @@ using Test
 using DataStructures
 
 using Logging: global_logger
+using LoggingExtras
 using GitHubActions
 get(ENV, "GITHUB_ACTIONS", "false") == "true" &&
-    global_logger(GitHubActions.GitHubActionsLogger())
+    global_logger(TeeLogger(
+                            GitHubActions.GitHubActionsLogger(),
+                            ConsoleLogger()
+                           ))
 
 using Pkg
 Pkg.develop(url = "https://github.com/adamslc/LoggingTestSets.jl")
