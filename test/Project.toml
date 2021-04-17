@@ -1,5 +1,4 @@
 [deps]
-DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
 GitHubActions = "6b79fd1a-b13a-48ab-b6b0-aaee1fee41df"
 Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 LoggingExtras = "e6f89c97-d47a-5376-807f-9c37f3926c36"
