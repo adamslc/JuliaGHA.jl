@@ -36,9 +36,9 @@ uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 
 [[JET]]
 deps = ["InteractiveUtils", "JuliaInterpreter", "LoweredCodeUtils", "MacroTools", "Pkg", "Revise"]
-git-tree-sha1 = "25a844ed7c19339187db11a56a9b790515e5f9c3"
+git-tree-sha1 = "50bc7ea48174285b2f6512107df9b5513f393e4a"
 uuid = "c3a54625-cd67-489e-a8e7-0a5a0ff4e31b"
-version = "0.2.0"
+version = "0.2.2"
 
 [[JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]

@@ -1,6 +1,5 @@
 using JuliaGHA
 using Test
-using DataStructures
 
 using Logging: global_logger, current_logger
 using LoggingExtras
@@ -13,18 +12,15 @@ Pkg.develop(url = "https://github.com/adamslc/LoggingTestSets.jl")
 using LoggingTestSets
 
 @testset LoggingTestSet "JuliaGHA.jl" begin
-    @test add(2, 2) == 4
-    @test dequeue!(do_stuff()) == 1
-
-    @testset "Stuff" begin
-        @test 1 + 1 == 2
-        @test 2^2 == 4
-        @test 2 * 2 == 4
+    @testset "add" begin
+        @test add(1, 1) == 2
+        @test add(2, 2) == 4
+        @test add(3, 3) == 6
     end
 
-    @testset "Badness" begin
-        @test 1 + 1 == 2
-        @test 1 - 1 == 0
-        @test 2 / 2 == 1
+    @testset "mul" begin
+        @test mul(1, 1) == 1
+        @test mul(2, 2) == 4
+        @test mul(3, 3) == 9
     end
 end
