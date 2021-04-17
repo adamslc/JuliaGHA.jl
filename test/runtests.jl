@@ -2,14 +2,11 @@ using JuliaGHA
 using Test
 using DataStructures
 
-using Logging: global_logger
+using Logging: global_logger, current_logger
 using LoggingExtras
 using GitHubActions
 get(ENV, "GITHUB_ACTIONS", "false") == "true" &&
-    global_logger(TeeLogger(
-                            GitHubActions.GitHubActionsLogger(),
-                            ConsoleLogger()
-                           ))
+    global_logger(TeeLogger(current_logger(), GitHubActions.GitHubActionsLogger()))
 
 using Pkg
 Pkg.develop(url = "https://github.com/adamslc/LoggingTestSets.jl")
@@ -28,6 +25,6 @@ using LoggingTestSets
     @testset "Badness" begin
         @test 1 + 1 == 2
         @test 1 - 1 == 0
-        @test 2 / 2 == 2
+        @test 2 / 2 == 1
     end
 end

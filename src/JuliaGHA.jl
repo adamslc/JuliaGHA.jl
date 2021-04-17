@@ -23,9 +23,8 @@ function do_stuff()
     return queue
 end
 
-function blah(   )
-    return "one"     +
-    "one"
+function blah()
+    return 1 + 1
 end
 
 end # module
