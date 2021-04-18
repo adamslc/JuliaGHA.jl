@@ -1,2 +1,4 @@
 [deps]
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"

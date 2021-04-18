@@ -66,11 +66,23 @@ version = "0.26.3"
 deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 
+[[HTTP]]
+deps = ["Base64", "Dates", "IniFile", "MbedTLS", "NetworkOptions", "Sockets", "URIs"]
+git-tree-sha1 = "c9f380c76d8aaa1fa7ea9cf97bddbc0d5b15adc2"
+uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+version = "0.9.5"
+
 [[IOCapture]]
 deps = ["Logging"]
 git-tree-sha1 = "377252859f740c217b936cebcd918a44f9b53b59"
 uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
 version = "0.1.1"
+
+[[IniFile]]
+deps = ["Test"]
+git-tree-sha1 = "098e4d2c533924c921f9f9847274f2ad89e018b8"
+uuid = "83e8ac13-25f8-5344-8a64-a9f2b223428f"
+version = "0.5.0"
 
 [[InteractiveUtils]]
 deps = ["Markdown"]
@@ -117,6 +129,12 @@ uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 [[Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
+
+[[MbedTLS]]
+deps = ["Dates", "MbedTLS_jll", "Random", "Sockets"]
+git-tree-sha1 = "1c38e51c3d08ef2278062ebceade0e46cefc96fe"
+uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
+version = "1.0.3"
 
 [[MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
