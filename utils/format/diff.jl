@@ -121,7 +121,8 @@ function post_code_comment(file, lines, body, url, sha, gha_token)
     end
 
     r = HTTP.request(
-        "POST", url,
+        "POST",
+        url,
         [
             "Accept" => "application/vnd.github.comfort-fade-preview+json",
             "Content-Type" => "application/json",
@@ -201,11 +202,17 @@ function main(; max_files = 3, max_diffs_per_file = 5)
     for (file, file_diff) in format_diff.files
         for diff in file_diff.diffs
             @info "Diff" content = diff.b_content lines = diff.a_lines
-            body =
-"```suggestion
-$(diff.b_content)
-```"
-post_code_comment(file, diff.a_lines, body, url, ENV["GITHUB_SHA"], ENV["GITHUB_TOKEN"])
+            body = "```suggestion
+                   $(diff.b_content)
+                   ```"
+            post_code_comment(
+                file,
+                diff.a_lines,
+                body,
+                url,
+                ENV["GITHUB_SHA"],
+                ENV["GITHUB_TOKEN"],
+            )
         end
     end
 
