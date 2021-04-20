@@ -168,6 +168,7 @@ function main(; max_files = 3, max_diffs_per_file = 5)
 
     # Check that each format diff can be accessed in the GitHub diff. If not,
     # then leaving suggusted changes will fail. This is a GitHub limitation.
+    @show github_diff.files
     for (file, file_diff) in format_diff.files
         if !haskey(github_diff.files, file_diff.filename)
             @error(
