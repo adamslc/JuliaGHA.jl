@@ -206,9 +206,7 @@ function main(; max_files = 3, max_diffs_per_file = 5)
     for (file, file_diff) in format_diff.files
         for diff in file_diff.diffs
             @info "Diff" content = diff.b_content lines = diff.a_lines
-            body = "```suggestion
-                   $(diff.b_content)
-                   ```"
+            body = "```suggestion\n$(diff.b_content)\n```"
             post_code_comment(
                 file,
                 diff.a_lines,
