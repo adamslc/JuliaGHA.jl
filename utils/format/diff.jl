@@ -182,7 +182,7 @@ function main(; max_files = 3, max_diffs_per_file = 5)
             format_lines = diff.a_lines
 
             lines_contained = false
-            for github_single_diff in github_file_diff.files
+            for github_single_diff in github_file_diff.diffs
                 if issubset(format_lines, github_single_diff.b_lines)
                     lines_contained = true
                     break
