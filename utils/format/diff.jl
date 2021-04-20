@@ -14,13 +14,13 @@ struct FileDiff
 end
 
 struct Diff
-    files::Dict{String, FileDiff}
+    files::Dict{String,FileDiff}
 end
 
 function parse_diff(diff::String)
     lines = filter(x -> x != "", split(diff, "\n"))
 
-    files = Dict{String, FileDiff}()
+    files = Dict{String,FileDiff}()
 
     i = 1
     while i <= length(lines)
@@ -80,7 +80,7 @@ function parse_single_diff(lines, i::Int)
         elseif startswith(lines[i], "+")
             b_content *= "\n" * lines[i][2:end]
         else
-            @error "Unexpected line in diff" line=lines[i]
+            @error "Unexpected line in diff" line = lines[i]
         end
 
         i += 1
@@ -97,20 +97,19 @@ function parse_diff_lines(str)
         return start_line:start_line
     else
         start_line, len = parse.(Int, split(str, ","))
-        return start_line:start_line + len - 1
+        return start_line:start_line+len-1
     end
 end
 
 url = "https://github.com/repos/adamslc/JuliaGHA.jl/pulls/5.diff"
 function get_github_diff(url)
     r = HTTP.request("GET", url)
-    @info "HTTP status" status=r.status
+    @info "HTTP status" status = r.status
     diff = String(r.body)
 end
 
 function post_code_comment(file, lines, body, url, sha, gha_token)
-    params = Dict("body" => body, "path" => "src/JuliaGHA.jl",
-                  "commit_id" => sha)
+    params = Dict("body" => body, "path" => "src/JuliaGHA.jl", "commit_id" => sha)
 
     if first(lines) >= last(lines)
         params["line"] = first(lines)
@@ -122,16 +121,22 @@ function post_code_comment(file, lines, body, url, sha, gha_token)
         params["side"] = "RIGHT"
     end
 
-    r = HTTP.request("POST", "https://api.github.com/repos/adamslc/JuliaGHA.jl/pulls/5/comments",
-                     ["Accept" => "application/vnd.github.comfort-fade-preview+json",
-                      "Content-Type" => "application/json", "Authorization" => "token $gha_token"],
-                     JSON.json(params))
+    r = HTTP.request(
+        "POST",
+        "https://api.github.com/repos/adamslc/JuliaGHA.jl/pulls/5/comments",
+        [
+            "Accept" => "application/vnd.github.comfort-fade-preview+json",
+            "Content-Type" => "application/json",
+            "Authorization" => "token $gha_token",
+        ],
+        JSON.json(params),
+    )
     println(r.status)
     body = String(r.body)
     j = JSON.parse(body)
 end
 
-function main(; max_files=3, max_diffs_per_file=5)
+function main(; max_files = 3, max_diffs_per_file = 5)
     if !haskey(ENV, "GITHUB_API_URL")
         @error("Not running on GitHub Actions")
         return false
@@ -140,29 +145,35 @@ function main(; max_files=3, max_diffs_per_file=5)
     format_diff = parse_diff(read(`git diff -U0`, String))
 
     if length(format_diff.files) > max_files
-        @error("Aborting because there are more than $max_files files with changes",
-              files_changed=length(format_diff.files))
+        @error(
+            "Aborting because there are more than $max_files files with changes",
+            files_changed = length(format_diff.files)
+        )
         return false
     end
 
     for (file, diff) in format_diff.files
         if length(diff.diffs) > max_diffs_per_file
-            @error("Aborting because there are more than $max_diffs_per_file in $file",
-                  num_diffs=length(diff.diffs))
+            @error(
+                "Aborting because there are more than $max_diffs_per_file in $file",
+                num_diffs = length(diff.diffs)
+            )
             return false
         end
     end
 
-    pr_number = split(ENV[GITHUB_REF], "/")[3]
-    url = "$(ENV[GITHUB_API_URL])/repos/$(ENV[GITHUB_REPOSITORY])/pulls/$pr_number"
+    pr_number = split(ENV["GITHUB_REF"], "/")[3]
+    url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number"
     github_diff = parse_diff(get_github_diff(url))
 
     # Check that each format diff can be accessed in the GitHub diff. If not,
     # then leaving suggusted changes will fail. This is a GitHub limitation.
     for (file, file_diff) in format_diff.files
         if !haskey(github_diff.files, file_diff.filename)
-            @error("A file has a formatting change that is not included in the PR diff",
-                  file=file_diff.filename)
+            @error(
+                "A file has a formatting change that is not included in the PR diff",
+                file = file_diff.filename
+            )
             return false
         end
 
@@ -179,15 +190,18 @@ function main(; max_files=3, max_diffs_per_file=5)
             end
 
             if !lines_contained
-                @error("A file has changes in locations not included in the
-                       original diff", file=file_diff.filename)
+                @error(
+                    "A file has changes in locations not included in the
+                    original diff",
+                    file = file_diff.filename
+                )
             end
         end
     end
 
     for (file, file_diff) in format_diff.files
         for diff in file_diff.diffs
-            @info "Diff" content=diff.b_content lines=diff.a_lines
+            @info "Diff" content = diff.b_content lines = diff.a_lines
         end
     end
 

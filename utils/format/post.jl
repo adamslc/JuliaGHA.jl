@@ -25,14 +25,24 @@ function poorly_formatted(x, y)
     return add(mul(x, x), mul(x, x))
 end
 ```"
-params = Dict("body" => "asdf", "path" => "src/JuliaGHA.jl",
-              # "start_line" => 1, "start_side" => "RIGHT",
-              "line" => 12, "side" => "RIGHT",
-              "commit_id" => sha)
-r = HTTP.request("POST", "https://api.github.com/repos/adamslc/JuliaGHA.jl/pulls/5/comments",
-                 ["Accept" => "application/vnd.github.comfort-fade-preview+json",
-                  "Content-Type" => "application/json", "Authorization" => "token $gha_token"],
-                 JSON.json(params))
+params = Dict(
+    "body" => "asdf",
+    "path" => "src/JuliaGHA.jl",
+    # "start_line" => 1, "start_side" => "RIGHT",
+    "line" => 12,
+    "side" => "RIGHT",
+    "commit_id" => sha,
+)
+r = HTTP.request(
+    "POST",
+    "https://api.github.com/repos/adamslc/JuliaGHA.jl/pulls/5/comments",
+    [
+        "Accept" => "application/vnd.github.comfort-fade-preview+json",
+        "Content-Type" => "application/json",
+        "Authorization" => "token $gha_token",
+    ],
+    JSON.json(params),
+)
 println(r.status)
 body = String(r.body)
 j = JSON.parse(body)
