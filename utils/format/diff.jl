@@ -122,6 +122,8 @@ function post_code_comment(file, lines, body, url, sha, gha_token)
         params["side"] = "RIGHT"
     end
 
+    println(params)
+
     r = HTTP.request(
         "POST",
         url,
