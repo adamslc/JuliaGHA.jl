@@ -1,4 +1,5 @@
 using HTTP
+using JSON
 
 struct SingleDiff
     a_lines::UnitRange{Int}
