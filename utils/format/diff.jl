@@ -121,8 +121,7 @@ function post_code_comment(file, lines, body, url, sha, gha_token)
     end
 
     r = HTTP.request(
-        "POST",
-        "https://api.github.com/repos/adamslc/JuliaGHA.jl/pulls/5/comments",
+        "POST", url,
         [
             "Accept" => "application/vnd.github.comfort-fade-preview+json",
             "Content-Type" => "application/json",
@@ -162,7 +161,6 @@ function main(; max_files = 3, max_diffs_per_file = 5)
     end
 
     pr_number = split(ENV["GITHUB_REF"], "/")[3]
-    # url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number.diff"
     url = "$(ENV["GITHUB_SERVER_URL"])/$(ENV["GITHUB_REPOSITORY"])/pull/$pr_number.diff"
     github_diff = parse_diff(get_github_diff(url))
 
@@ -199,9 +197,15 @@ function main(; max_files = 3, max_diffs_per_file = 5)
         end
     end
 
+    url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number/comments"
     for (file, file_diff) in format_diff.files
         for diff in file_diff.diffs
             @info "Diff" content = diff.b_content lines = diff.a_lines
+            body =
+"```suggestion
+$(diff.b_content)
+```"
+post_code_comment(file, diff.a_lines, body, url, ENV["GITHUB_SHA"], ENV["GITHUB_TOKEN"])
         end
     end
 
