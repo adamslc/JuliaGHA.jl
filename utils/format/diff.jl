@@ -111,12 +111,12 @@ function post_code_comment(file, lines, body, url, sha, gha_token)
     params = Dict("body" => body, "path" => "src/JuliaGHA.jl", "commit_id" => sha)
 
     if first(lines) >= last(lines)
-        params["line"] = first(lines)
+        params["line"] = string(first(lines))
         params["side"] = "RIGHT"
     else
-        params["start_line"] = first(lines)
+        params["start_line"] = string(first(lines))
         params["start_side"] = "RIGHT"
-        params["line"] = last(lines)
+        params["line"] = string(last(lines))
         params["side"] = "RIGHT"
     end
 
