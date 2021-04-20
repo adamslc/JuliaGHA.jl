@@ -164,9 +164,6 @@ function main(; max_files = 3, max_diffs_per_file = 5)
     pr_number = split(ENV["GITHUB_REF"], "/")[3]
     # url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number.diff"
     url = "$(ENV["GITHUB_SERVER_URL"])/$(ENV["GITHUB_REPOSITORY"])/pull/$pr_number.diff"
-    asdf = get_github_diff(url)
-    println(asdf)
-    println(url)
     github_diff = parse_diff(get_github_diff(url))
 
     # Check that each format diff can be accessed in the GitHub diff. If not,
@@ -181,7 +178,7 @@ function main(; max_files = 3, max_diffs_per_file = 5)
             return false
         end
 
-        github_file_diff = get(github_diff, file_diff.filename)
+        github_file_diff = get(github_diff.files, file_diff.filename)
         for diff in file_diff.diffs
             format_lines = diff.a_lines
 
