@@ -162,11 +162,8 @@ function main(; max_files = 3, max_diffs_per_file = 5)
     end
 
     pr_number = split(ENV["GITHUB_REF"], "/")[3]
-    url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number"
-    asdf = get_github_diff(url)
-    println(url)
-    println(asdf)
-    github_diff = parse_diff(asdf)
+    url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number.diff"
+    github_diff = parse_diff(get_github_diff(url))
 
     # Check that each format diff can be accessed in the GitHub diff. If not,
     # then leaving suggusted changes will fail. This is a GitHub limitation.
