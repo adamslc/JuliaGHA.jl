@@ -101,7 +101,6 @@ function parse_diff_lines(str)
     end
 end
 
-url = "https://github.com/repos/adamslc/JuliaGHA.jl/pulls/5.diff"
 function get_github_diff(url)
     r = HTTP.request("GET", url)
     @info "HTTP status" status = r.status
@@ -164,7 +163,10 @@ function main(; max_files = 3, max_diffs_per_file = 5)
 
     pr_number = split(ENV["GITHUB_REF"], "/")[3]
     url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number"
-    github_diff = parse_diff(get_github_diff(url))
+    asdf = get_github_diff(url)
+    println(url)
+    println(asdf)
+    github_diff = parse_diff(asdf)
 
     # Check that each format diff can be accessed in the GitHub diff. If not,
     # then leaving suggusted changes will fail. This is a GitHub limitation.
