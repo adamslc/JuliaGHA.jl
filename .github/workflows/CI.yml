@@ -18,7 +18,9 @@ jobs:
       - name: Format with JuliaFormatter
         run: ./utils/format/format.sh
       - name: Post formatting help
-        run: julia --project=utils/format utils/format/diff.jl
+        run: |
+          GITHUB_SHA=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
+          julia --project=utils/format utils/format/diff.jl
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Check formatting
