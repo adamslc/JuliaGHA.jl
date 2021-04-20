@@ -163,7 +163,7 @@ function main(; max_files = 3, max_diffs_per_file = 5)
 
     pr_number = split(ENV["GITHUB_REF"], "/")[3]
     # url = "$(ENV["GITHUB_API_URL"])/repos/$(ENV["GITHUB_REPOSITORY"])/pulls/$pr_number.diff"
-    url = "$(ENV["GITHUB_URL"])/$(ENV["GITHUB_REPOSITORY"])/pull/$pr_number.diff"
+    url = "$(ENV["GITHUB_SERVER_URL"])/$(ENV["GITHUB_REPOSITORY"])/pull/$pr_number.diff"
     asdf = get_github_diff(url)
     println(asdf)
     println(url)
