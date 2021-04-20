@@ -109,15 +109,16 @@ function get_github_diff(url)
 end
 
 function post_code_comment(file, lines, body, url, sha, gha_token)
-    params = Dict("body" => body, "path" => "src/JuliaGHA.jl", "commit_id" => sha)
+    params =
+        Dict{String,Any}("body" => body, "path" => "src/JuliaGHA.jl", "commit_id" => sha)
 
     if first(lines) >= last(lines)
-        params["line"] = string(first(lines))
+        params["line"] = first(lines)
         params["side"] = "RIGHT"
     else
-        params["start_line"] = string(first(lines))
+        params["start_line"] = first(lines)
         params["start_side"] = "RIGHT"
-        params["line"] = string(last(lines))
+        params["line"] = last(lines)
         params["side"] = "RIGHT"
     end
 
