@@ -26,7 +26,7 @@ end
 # Does not pass formatting test.
 function   poorly_formatted(x     , y  )
     return add(mul(x,x),
-        mul(x,
+        mul(x,    
             x))
     end
 
