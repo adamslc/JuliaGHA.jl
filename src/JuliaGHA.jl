@@ -31,7 +31,7 @@ function   poorly_formatted(x     , y  )
     end
 
 function a_new_func(x::Real)
-    return 2*x
+    return 2 * x
 end
 
 end # module
